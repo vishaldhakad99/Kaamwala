@@ -9,7 +9,6 @@ const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '30d' });
 };
 
-// @POST /api/auth/register
 router.post('/register', async (req, res) => {
   try {
     const { name, phone, email, password, role, city, state, language, companyName, companySize } = req.body;
@@ -34,12 +33,19 @@ router.post('/register', async (req, res) => {
         role: user.role, city: user.city, language: user.language
       }
     });
+
+    
   } catch (error) {
     res.status(500).json({ success: false, message: error.message });
   }
 });
 
+
+
+
 // @POST /api/auth/login
+
+
 router.post('/login', async (req, res) => {
   try {
     const { phone, password } = req.body;
