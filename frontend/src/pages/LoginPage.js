@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
+
+
 import toast from 'react-hot-toast';
 
 const LoginPage = () => {
@@ -10,6 +12,9 @@ const LoginPage = () => {
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
   const { t, lang } = useLanguage();
+
+
+  
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -19,6 +24,9 @@ const LoginPage = () => {
     try {
       await login(phone, password);
       toast.success(t.loginSuccess);
+
+
+      
       navigate('/dashboard');
     } catch (error) {
       toast.error(error.response?.data?.message || 'Login fail hua');
@@ -32,6 +40,8 @@ const LoginPage = () => {
       <div className="card" style={{ width: '100%', maxWidth: 420, padding: 32 }}>
         <div style={{ textAlign: 'center', marginBottom: 28 }}>
           <div style={{ fontSize: '2.5rem', marginBottom: 8 }}>🔧</div>
+
+  
           <h1 style={{ fontSize: '1.8rem', fontWeight: 800, color: '#FF6B35' }}>{t.appName}</h1>
           <p style={{ color: '#666' }}>{lang === 'hi' ? 'अपने अकाउंट में लॉगिन करें' : 'Login to your account'}</p>
         </div>
@@ -41,6 +51,8 @@ const LoginPage = () => {
             <label>📱 {t.phone}</label>
             <input
               type="tel"
+
+
               placeholder={lang === 'hi' ? '10 अंकों का नंबर' : '10-digit phone number'}
               value={phone}
               onChange={e => setPhone(e.target.value)}
@@ -51,6 +63,8 @@ const LoginPage = () => {
             <label>🔒 {t.password}</label>
             <input
               type="password"
+
+
               placeholder={lang === 'hi' ? 'पासवर्ड डालें' : 'Enter password'}
               value={password}
               onChange={e => setPassword(e.target.value)}
@@ -61,6 +75,11 @@ const LoginPage = () => {
             {loading ? '...' : `🚀 ${t.login}`}
           </button>
         </form>
+
+
+
+
+            
 
         <p style={{ textAlign: 'center', marginTop: 20, color: '#666' }}>
           {lang === 'hi' ? 'नए हैं? ' : "New here? "}
